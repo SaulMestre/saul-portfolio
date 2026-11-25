@@ -1,0 +1,31 @@
+name: Spec Kit initialization preview
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/spec-kit-preview.yml'
+permissions: {}
+jobs:
+  initialize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Install official pinned Specify CLI
+        run: |
+          python3 -m venv "$RUNNER_TEMP/specify-venv"
+          "$RUNNER_TEMP/specify-venv/bin/python" -m pip install 'git+https://github.com/github/spec-kit.git@c8133f463a586879e3af6dfd2864beb8995a8764'
+          "$RUNNER_TEMP/specify-venv/bin/specify" version
+      - name: Generate isolated Copilot integration
+        working-directory: ${{ runner.temp }}
+        run: |
+          "$RUNNER_TEMP/specify-venv/bin/specify" init spec-kit-preview --integration copilot --script py --non-interactive --ignore-agent-tools
+      - name: Retain generated project for review
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: spec-kit-generated
+          path: |
+            ${{ runner.temp }}/spec-kit-preview/
+            !${{ runner.temp }}/spec-kit-preview/.git/**
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 3
