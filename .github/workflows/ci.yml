@@ -7,7 +7,7 @@ permissions:
   contents: read
 jobs:
   frontend:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     defaults:
       run:
@@ -19,15 +19,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: .node-version
-      - name: Restore
-        run: |
-          if [ ! -f package-lock.json ]; then npm install --package-lock-only; fi
-          npm ci
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: npm-lock
-          path: frontend/package-lock.json
-          if-no-files-found: error
+      - name: Restore locked dependencies
+        run: npm ci
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run format:check
@@ -42,7 +35,7 @@ jobs:
         if: ${{ !cancelled() }}
         run: git ls-files --error-unmatch package-lock.json
   backend:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -51,17 +44,8 @@ jobs:
       - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           global-json-file: global.json
-      - name: Restore
-        run: |
-          if [ ! -f backend/tests/Portfolio.Tests/packages.lock.json ]; then
-            dotnet restore backend/Portfolio.slnx
-          fi
-          dotnet restore backend/Portfolio.slnx --locked-mode
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: nuget-locks
-          path: backend/**/packages.lock.json
-          if-no-files-found: error
+      - name: Restore locked dependencies
+        run: dotnet restore backend/Portfolio.slnx --locked-mode
       - run: dotnet build backend/Portfolio.slnx --no-restore --configuration Release
       - run: dotnet test backend/Portfolio.slnx --no-build --configuration Release
       - name: Require committed locks
