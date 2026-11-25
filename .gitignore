@@ -44,3 +44,8 @@ test-results/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Next.js generated output
+.next/
+out/
+next-env.d.ts

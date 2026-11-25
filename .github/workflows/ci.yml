@@ -1,0 +1,55 @@
+name: Engineering checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  frontend:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+      - name: Restore locked dependencies
+        run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run format:check
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - name: Audit dependencies
+        if: ${{ !cancelled() }}
+        run: npm audit --audit-level=high
+      - name: Require committed lock
+        if: ${{ !cancelled() }}
+        run: git ls-files --error-unmatch package-lock.json
+  backend:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          global-json-file: global.json
+      - name: Restore locked dependencies
+        run: dotnet restore backend/Portfolio.slnx --locked-mode
+      - run: dotnet build backend/Portfolio.slnx --no-restore --configuration Release
+      - run: dotnet test backend/Portfolio.slnx --no-build --configuration Release
+      - name: Require committed locks
+        run: |
+          for project in $(find backend -name '*.csproj'); do
+            git ls-files --error-unmatch "$(dirname "$project")/packages.lock.json"
+          done

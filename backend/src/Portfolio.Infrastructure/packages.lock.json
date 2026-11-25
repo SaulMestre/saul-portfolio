@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "portfolio.application": {
+        "type": "Project",
+        "dependencies": {
+          "Portfolio.Domain": "[1.0.0, )"
+        }
+      },
+      "portfolio.domain": {
+        "type": "Project"
+      }
+    }
+  }
+}
