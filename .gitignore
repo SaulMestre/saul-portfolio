@@ -1,0 +1,46 @@
+# Local secrets and private content
+.env
+.env.*
+!.env.example
+!.env.*.example
+**/appsettings.*.local.json
+**/appsettings.Local.json
+**/secrets.json
+**/secrets/
+**/private/
+**/private-data/
+**/knowledge-private/
+*.pem
+*.key
+*.pfx
+*.p12
+*.jks
+*.kdbx
+*.sql.gz
+*.dump
+*.bak
+*.log
+
+# .NET
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+TestResults/
+artifacts/
+
+# JavaScript
+node_modules/
+dist/
+coverage/
+.vite/
+*.tsbuildinfo
+npm-debug.log*
+playwright-report/
+test-results/
+
+# Local tooling
+.idea/
+.DS_Store
+Thumbs.db
