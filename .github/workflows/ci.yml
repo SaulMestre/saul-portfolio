@@ -1,0 +1,64 @@
+name: Engineering checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: Restore
+        run: |
+          if [ ! -f package-lock.json ]; then npm install --package-lock-only; fi
+          npm ci
+      - uses: actions/upload-artifact@v4
+        with:
+          name: npm-lock
+          path: frontend/package-lock.json
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run format:check
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: npm audit --audit-level=high
+      - name: Require committed lock
+        run: git ls-files --error-unmatch package-lock.json
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - name: Restore
+        run: |
+          if [ ! -f backend/tests/Portfolio.Tests/packages.lock.json ]; then
+            dotnet restore backend/Portfolio.slnx
+          fi
+          dotnet restore backend/Portfolio.slnx --locked-mode
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nuget-locks
+          path: backend/**/packages.lock.json
+      - run: dotnet build backend/Portfolio.slnx --no-restore --configuration Release
+      - run: dotnet test backend/Portfolio.slnx --no-build --configuration Release
+      - name: Require committed locks
+        run: |
+          for project in $(find backend -name '*.csproj'); do
+            git ls-files --error-unmatch "$(dirname "$project")/packages.lock.json"
+          done
