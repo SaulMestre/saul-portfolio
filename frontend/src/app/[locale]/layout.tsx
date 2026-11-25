@@ -13,9 +13,7 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({
-  params,
-}: Pick<LayoutProps, "params">): Promise<Metadata> {
+export async function generateMetadata({ params }: Pick<LayoutProps, "params">): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
