@@ -9,8 +9,8 @@ per-page action styles.
 - `frontend/src/styles/tokens.css`: semantic palette, typography, spacing,
   borders, radii, shadow, motion and control dimensions. Native CSS
   `light-dark()` resolves colors under the root color scheme; system preference
-  is automatic, explicit light/dark root overrides are reserved for the next
-  theme increment. Tailwind aliases reference the same tokens.
+  is automatic, explicit light/dark root overrides are applied by the
+  shared theme control. Tailwind aliases reference the same tokens.
 - `frontend/src/styles/primitives.css`: shared variant, size, state, surface
   and container rules. Both Button and ActionLink consume `ui-action`.
 - `frontend/src/app/globals.css`: imports shared styles and defines base
@@ -41,11 +41,16 @@ button to avoid accidental form submissions; request submit or reset
 explicitly. Disabled and busy buttons cannot be activated; busy keeps the
 accessible name and sets aria-busy. Supply a localized busy label as needed.
 ActionLink retains native link semantics and must have a valid destination.
+Use documentNavigation for locale changes across localized root layouts so
+that the new document runs the early theme bootstrap. Other internal links
+use Next Link client navigation; both paths share the same visual rules.
 Cards are surfaces, not buttons. Container uses responsive width and padding.
 
-Tokens support reduced motion and system appearance; the explicit theme
-selector, persistence, complete shared site layout and development showcase
-belong to subsequent approved increments. New components should be added only
+Tokens support reduced motion and system appearance. The shared site layout
+contains the localized native theme selector. The validated browser-local
+preference is stored as portfolio.theme; system mode removes data-theme so
+CSS follows the OS. A static synchronous head script restores explicit modes
+before rendering. The development showcase belongs to the final increment. New components should be added only
 when a feature needs them. Keep component behavior tests and the existing
 coverage gates. See the approved visual foundation plan and research for
 the design decisions and verification matrix.

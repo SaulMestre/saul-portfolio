@@ -22,6 +22,7 @@ describe("ActionLink", () => {
         variant="outline"
         size="sm"
         hrefLang="es"
+        documentNavigation
         lang="es"
         aria-current="page"
       >

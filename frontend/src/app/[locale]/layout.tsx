@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
+import { SiteLayout } from "../../components/layout/site-layout";
+import { ThemeBootstrap } from "../../components/theme/theme-bootstrap";
 import { isLocale, locales, messages } from "../../localization/messages";
 import "../globals.css";
 
@@ -29,8 +31,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   if (!isLocale(locale)) notFound();
 
   return (
-    <html lang={locale}>
-      <body>{children}</body>
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        <ThemeBootstrap />
+      </head>
+      <body>
+        <SiteLayout locale={locale}>{children}</SiteLayout>
+      </body>
     </html>
   );
 }
