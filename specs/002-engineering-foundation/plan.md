@@ -1,6 +1,6 @@
 # Implementation plan: Engineering foundation
 
-**Status:** Proposed; runtime implementation follows owner approval.
+**Status:** Approved foundation implemented; PR #7 merged. Baseline verification recorded in the follow-up PR.
 
 ## Technical direction
 
@@ -48,9 +48,11 @@
 - AI: no live model calls or private knowledge in this feature.
 - Release: no claim of production deployment.
 
-## Decisions pending
+## Recorded decisions and remaining scope
 
-Exact supported versions, static export versus server deployment after
-evaluating requirements, initial locale/default routing, initial coverage
-baseline, branch protection availability and the precise secret-scanning
-configuration. Record decisions in the implementation PR.
+- Toolchains and locked dependencies are documented in `docs/development.md`.
+- Initial public routes are Spanish and English, with root redirect to Spanish.
+- Initial coverage baseline: 100% frontend lines, statements, functions and branches; 100% backend lines (7/7), verified in run 45827560827. Enforce these initial floors and require owner-approved, evidence-based changes with non-regression tests as the codebase grows.
+- Active main ruleset confirmed by owner; actual check contexts are frontend, backend, spec-kit and secrets. Connector cannot inspect ruleset settings directly.
+- Official Spec Kit 1.4.4 integration passed CI; owner confirmed local skill discovery. Verify interactive invocation at the first feature's specification gate.
+- Final production deployment mode and static export remain product-feature decisions, not foundation claims.
