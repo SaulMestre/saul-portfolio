@@ -83,3 +83,13 @@ test("theme token pairs satisfy the planned contrast minima", async ({ page }) =
     }
   }
 });
+
+for (const locale of ["es", "en"]) {
+  test(`production denies the ${locale} development showcase`, async ({ page }) => {
+    const response = await page.goto("/" + locale + "/design-system");
+    expect(response?.status()).toBe(404);
+    await expect(page.locator("main button[data-variant]")).toHaveCount(0);
+    await page.goto("/" + locale);
+    await expect(page.locator('a[href$="/design-system"]')).toHaveCount(0);
+  });
+}

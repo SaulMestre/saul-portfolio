@@ -40,3 +40,11 @@ New tests are committed before implementation. No new theme/layout behavior or p
 The tests-first run 45845536344 rejected the new component imports (TS2307) before the theme and layout modules existed. Backend, Spec Kit and secret scanning passed (45845535206). Runtime assertions were not reached. This commit implements the missing contracts and integrates them in the locale layout; the final green run and manual checks remain pending.
 
 Engineering checks 45849396759 on 354c3e75325d70ebd015074d360d0eeffecd1765 passed lint, typecheck, formatting, build and 53 unit tests at 100% in all coverage metrics. Production browser checks: 22 passed, 5 failed. Four explicit-theme locale transitions reset the selector to system, while the original keyboard test expected the language link immediately after the skip link and did not account for the new Home link. The correction uses a native full-document locale link sharing ActionLink styles, restores the theme through the existing head bootstrap, and checks both keyboard stops. The theme matrix additionally checks persisted storage and the reverse locale transition. Await CI before marking these tasks complete.
+
+## PR C — merged and verified
+
+PR #12 merged at fa4a8e369ae0c3bdc57b46ac4acbd56f11f80400. Engineering checks 45853034556 and secret scanning 45853034533 passed: 53 unit tests, 27 production browser tests, 100% frontend coverage in all metrics, negative fixtures rejected and zero reported npm vulnerabilities. Theme modes survive reload and both directions of locale navigation; system changes, storage denial, early bootstrap, viewport matrix, keyboard and reduced-motion tests passed. LCP samples 392/388/384ms (median 388ms), CLS 0 in all three. T011–T021 are verified. T022 manual zoom/touch/visual review remains open; automated browser evidence is not a substitute for that review.
+
+## PR D — showcase and final verification
+
+Axe-core 4.14.1 (MPL-2.0) is already present transitively in the approved npm lock via eslint-plugin-jsx-a11y. Promote the same version to an exact direct development dependency using npm, retain generated manifests in an artifact, review the diff and remove the temporary preparation workflow before merging. No runtime package addition. Showcase tests precede implementation; pending CI and final verification.
