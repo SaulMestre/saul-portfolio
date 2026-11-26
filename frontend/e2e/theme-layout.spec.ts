@@ -7,7 +7,7 @@ const backgrounds = {
 
 for (const system of ["light", "dark"] as const) {
   for (const mode of ["system", "light", "dark"] as const) {
-    test(`theme ${mode} follows ${system} correctly across reload and language`, async ({ page }) => {
+    test(`${mode} theme on ${system} survives reload and locale`, async ({ page }) => {
       await page.emulateMedia({ colorScheme: system });
       await page.goto("/es");
       const selector = page.getByRole("combobox", { name: "Tema" });
@@ -26,7 +26,7 @@ for (const system of ["light", "dark"] as const) {
   }
 }
 
-test("system appearance updates without reload, explicit mode takes precedence", async ({ page }) => {
+test("system tracks OS changes; explicit mode wins", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" });
   await page.goto("/en");
   await expect(page.locator("body")).toHaveCSS("background-color", backgrounds.light);
