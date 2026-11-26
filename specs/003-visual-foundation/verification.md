@@ -28,3 +28,11 @@ negative tests and final implementation checks have been verified.
 ## Tests-first run
 
 Engineering checks 45840166317 on 0e6274eb4dd8f376da35f9f85956fb3c9c14df1d rejected the new component tests at TypeScript checking because the button, action-link, card and container modules did not exist (TS2307). Backend, Spec Kit and secrets passed. This confirms the pre-implementation contract is absent; the runtime assertions and browser tests were not reached in this run. The implementation and formatting adjustments are now submitted for CI; do not mark the remaining tasks complete until verified.
+
+## PR B — merged and verified
+
+PR #11 merged at bf9eca09e050efdcf991f9ee803e3c8e4d5012d9. Engineering checks 45844203608 and secret scanning 45844203586 passed: 31 unit tests, 5 production browser tests, 100% frontend coverage in all metrics, negative fixtures rejected and zero reported npm vulnerabilities. Token propagation and planned contrast pairs passed. Mobile LCP samples 412/416/400 ms (median 412 ms), CLS 0 in all three. T003–T010 are complete. Full feature accessibility and final performance comparison remain pending.
+
+## PR C — theme and layout
+
+New tests are committed before implementation. No new theme/layout behavior or passing result is claimed yet.

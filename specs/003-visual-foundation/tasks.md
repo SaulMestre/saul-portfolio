@@ -13,9 +13,9 @@
 
 ## Phase 2: Foundational (blocking)
 
-- [ ] T003 Add test cases for semantic token use and contrast of actual role pairs in frontend/e2e/visual-foundation.spec.ts and relevant browser tests (FR-001, FR-002, FR-011).
-- [ ] T004 Implement frontend/src/styles/tokens.css and import from frontend/src/app/globals.css; canonical DesignToken.role, DesignToken.lightValue, DesignToken.darkValue, DesignToken.category in data-model.md. Expose semantic Tailwind aliases and shared spacing/type/radius/motion scales; no duplicate palette (FR-001, FR-002).
-- [ ] T005 Implement shared state/variant rules in frontend/src/styles/primitives.css, focus-visible and semantic surface styles; document tokens and consumption in docs/design-system.md (FR-001, FR-006, FR-007).
+- [x] T003 Add test cases for semantic token use and contrast of actual role pairs in frontend/e2e/visual-foundation.spec.ts and relevant browser tests (FR-001, FR-002, FR-011).
+- [x] T004 Implement frontend/src/styles/tokens.css and import from frontend/src/app/globals.css; canonical DesignToken.role, DesignToken.lightValue, DesignToken.darkValue, DesignToken.category in data-model.md. Expose semantic Tailwind aliases and shared spacing/type/radius/motion scales; no duplicate palette (FR-001, FR-002).
+- [x] T005 Implement shared state/variant rules in frontend/src/styles/primitives.css, focus-visible and semantic surface styles; document tokens and consumption in docs/design-system.md (FR-001, FR-006, FR-007).
 
 **Checkpoint**: Token foundation reviewed; no page-specific arbitrary palette.
 
@@ -23,11 +23,11 @@
 
 **Independent test**: shared controls render documented semantics and consume identical visual variants across contexts.
 
-- [ ] T006 [P] [US1] Write frontend/src/components/ui/button.test.tsx for all variants/sizes, native type, loading/disabled behavior, accessible names and activation; cover each constrained SharedPrimitive field in data-model.md (FR-006, SC-001).
-- [ ] T007 [P] [US1] Write frontend/src/components/ui/action-link.test.tsx and card.test.tsx for native links, variant/size use, semantics and surfaces (FR-006, FR-007).
-- [ ] T008 [US1] Implement frontend/src/components/ui/button.tsx with SharedPrimitive.variant, SharedPrimitive.size, SharedPrimitive.disabled, SharedPrimitive.isLoading, SharedPrimitive.type and SharedPrimitive.children per data-model.md and contracts/ui.md; no per-instance variant CSS (FR-006).
-- [ ] T009 [US1] Implement frontend/src/components/ui/action-link.tsx and card.tsx with SharedPrimitive.variant, SharedPrimitive.size, SharedPrimitive.children and SharedPrimitive.surface per data-model.md; keep real navigation semantics; add shared container in frontend/src/components/layout/container.tsx with corresponding tests (FR-007).
-- [ ] T010 [US1] Adopt shared components in frontend/src/features/shell/portfolio-shell.tsx where relevant; validate common variant change propagation and record PR B evidence in verification.md (FR-001, FR-015, SC-001).
+- [x] T006 [P] [US1] Write frontend/src/components/ui/button.test.tsx for all variants/sizes, native type, loading/disabled behavior, accessible names and activation; cover each constrained SharedPrimitive field in data-model.md (FR-006, SC-001).
+- [x] T007 [P] [US1] Write frontend/src/components/ui/action-link.test.tsx and card.test.tsx for native links, variant/size use, semantics and surfaces (FR-006, FR-007).
+- [x] T008 [US1] Implement frontend/src/components/ui/button.tsx with SharedPrimitive.variant, SharedPrimitive.size, SharedPrimitive.disabled, SharedPrimitive.isLoading, SharedPrimitive.type and SharedPrimitive.children per data-model.md and contracts/ui.md; no per-instance variant CSS (FR-006).
+- [x] T009 [US1] Implement frontend/src/components/ui/action-link.tsx and card.tsx with SharedPrimitive.variant, SharedPrimitive.size, SharedPrimitive.children and SharedPrimitive.surface per data-model.md; keep real navigation semantics; add shared container in frontend/src/components/layout/container.tsx with corresponding tests (FR-007).
+- [x] T010 [US1] Adopt shared components in frontend/src/features/shell/portfolio-shell.tsx where relevant; validate common variant change propagation and record PR B evidence in verification.md (FR-001, FR-015, SC-001).
 
 **Checkpoint / PR B**: tokens, primitives and tests; owner review, required CI green.
 
