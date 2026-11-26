@@ -22,15 +22,17 @@
 - [x] T012 Add backend unit/integration and architecture tests.
 - [x] T013 Add frontend behavior/accessibility tests and critical smoke E2E.
 - [x] T014 Configure CI with reproducible restores, build, test and security checks.
-- [ ] T015 Run checks and document actual results, failure behavior and coverage baseline.
-- [ ] T016 Document verified development commands and proposed branch protections.
+- [x] T015 Run checks and document actual results, failure behavior and coverage baseline.
+- [x] T016 Document verified development commands and proposed branch protections.
 - [x] T017 Owner reviews implementation PR; merge only after required checks.
 
 ## Verification notes
 
 PR #3 was merged after engineering checks (45653173663) and secret scanning
 (45653173649) passed. T006: official Spec Kit integration verified in CI run 45802488317; PR #6 merged. Interactive Copilot invocation remains a separate manual verification.
-T015 and T016 remain open for the coverage baseline, explicit negative tests,
-local command verification and branch protection configuration.
+T015: PR #7 merged after successful engineering checks (45827560827) and secret scanning (45827560440). Frontend lines, statements, functions and branches all measured 100%; backend lines measured 100% (7/7). TypeScript and both test runners rejected deliberate invalid fixtures. Baseline floors are set from these verified measurements in the follow-up PR.
+T016: development commands are documented with CI verification; local application execution on the owner's machine is not independently verified. Owner confirmed active main protection and local Specify 1.4.4 installation and Copilot skill discovery on 2026-11-26.
 
-Owner confirmation (2026-11-26): active main protection ruleset created; Specify 1.4.4 installed locally and Copilot skill discovery confirmed. Actual skill execution remains pending. Initial frontend and backend coverage reports were obtained from runs 45807068825 and 45807068727. The TypeScript negative fixture was correctly rejected with TS2322; the verifier's expected diagnostic marker is corrected in PR #7. Backend negative fixture passed. Final coverage and negative checks remain pending the revised CI run.
+## Follow-up verification before first feature implementation
+
+- [ ] F001 Invoke Spec Kit interactively for the first real feature; review spec, plan and tasks against the constitution before implementing. Skill discovery is confirmed; interactive invocation has not yet been verified.

@@ -15,6 +15,8 @@ npm run dev
 npm run lint
 npm run typecheck
 npm test
+npm run test:coverage
+npm run format:check
 npm run build
 npx playwright install chromium
 npm run test:e2e
@@ -76,17 +78,37 @@ Bootstrap PR #3 was merged after successful CI run 45653173663 and secret
 scan 45653173649. Frontend and backend builds, locked dependency restores,
 unit and integration tests, browser smoke tests and static checks passed.
 The npm audit reported zero vulnerabilities. Local developer commands have
-not been independently executed on the owner's machine. Branch protection,
-coverage baseline remain open. Spec Kit integration passed CI run 45802488317. Do not deploy this shell as the final portfolio.
+not been independently executed on the owner's machine. Branch protection is
+owner-confirmed. Spec Kit integration passed CI run 45802488317. Do not deploy
+this shell as the final portfolio.
 
 ## Final foundation verification
 
-Coverage is measured over application source, excluding test assemblies and test files. Initial CI measurements: frontend 23.52% lines (4/17), 18.18% statements, 11.11% functions and 25% branches (run 45807068825); backend 100% lines (7/7, run 45807068727). These cover only the bootstrap, not the future application. Initial floors are rounded down for frontend and 100% for backend lines. Additional locale and routing tests are submitted to raise the frontend baseline; final floors will be set from the verified updated run. Frontend coverage uses the matching Vitest V8 provider. Backend coverage uses the already locked Microsoft.CodeCoverage collector. Negative fixtures are created only in CI and removed after the expected failure.
+Coverage is measured over application source, excluding test assemblies and
+test files. The initial frontend measurement was 23.52% lines, 18.18%
+statements, 11.11% functions and 25% branches (run 45807068825). The backend
+measured 100% lines (7/7, run 45807068727).
+
+PR #7 merged after successful engineering checks (45827560827) and secret
+scanning (45827560440). The verified baseline is now 100% of frontend lines,
+statements, functions and branches, and 100% of backend executable lines (7/7).
+These measurements describe the small bootstrap only. CI also confirmed that
+TypeScript rejects TS2322 and both frontend and backend test runners reject
+deliberately failing fixtures. The npm audit reported zero known vulnerabilities.
+
+The initial coverage floors match the verified baseline: 100% for all four
+frontend metrics and backend lines. Do not lower floors or exclude relevant
+source merely to pass CI. As the application grows, any evidence-based
+adjustment must be explicitly justified in an approved specification and PR,
+preserving critical-path and non-regression tests. Coverage is not proof of
+correctness. Frontend coverage uses the locked Vitest V8 provider; backend
+coverage uses the locked Microsoft.CodeCoverage collector. Negative fixtures
+are created only in CI and removed after the expected failure.
 
 ### Required repository rules (owner configuration)
 
-Create an active branch ruleset targeting `main` in repository Settings > Rules > Rulesets. Require a pull request before merging, require the four checks `Engineering checks / frontend`, `Engineering checks / backend`, `Engineering checks / spec-kit`, and `Secret scanning / secrets` (select the actual check contexts from successful runs), require up-to-date branches, block force pushes and deletion, and do not add routine bypass actors. The owner retains review responsibility; do not require an independent approval until a separate reviewer is available, because GitHub does not permit authors to approve their own PRs. The owner confirmed creation of the active ruleset on 2026-11-26 after reviewing the four GitHub Actions check contexts and configuration. This connector cannot independently read rulesets.
+Maintain the active branch ruleset targeting `main` in repository Settings > Rules > Rulesets. Require a pull request before merging, require the four GitHub Actions check contexts `frontend`, `backend`, `spec-kit`, and `secrets`, require up-to-date branches, block force pushes and deletion, and do not add routine bypass actors. The owner retains review responsibility; do not require an independent approval until a separate reviewer is available, because GitHub does not permit authors to approve their own PRs. The owner confirmed creation of the active ruleset on 2026-11-26 after reviewing the four GitHub Actions check contexts and configuration. This connector cannot independently read rulesets.
 
 ### Interactive Copilot verification (owner environment)
 
-Open the repository in VS Code with GitHub Copilot enabled. Open agent chat and confirm the nine Spec Kit skills are available. In a disposable branch or worktree invoke `/speckit-specify` for a synthetic feature and review the resulting specification, then invoke plan and tasks. Confirm the project constitution is respected and tests are included. Discard the synthetic feature after verification. Do not publish generated personal data or bypass permission prompts. On 2026-11-26 the owner installed Specify 1.4.4 and confirmed skill discovery after opening the repository root in VS Code. Actual interactive invocation remains pending the first real feature; no live Copilot execution is claimed.
+Open the repository in VS Code with GitHub Copilot enabled. Open agent chat and confirm the nine Spec Kit skills are available. For the first real feature, invoke `/speckit-specify` on its development branch, review the resulting specification, then invoke plan and tasks at the approved review gates. Confirm the project constitution is respected and tests are included before implementation. Do not publish generated personal data or bypass permission prompts. On 2026-11-26 the owner installed Specify 1.4.4 and confirmed skill discovery after opening the repository root in VS Code. Actual interactive invocation remains pending the first real feature; no live Copilot execution is claimed.
