@@ -123,4 +123,6 @@ test("capture repeatable production shell performance", async ({ browser, baseUR
   };
   await writeFile(testInfo.outputPath("metrics.json"), JSON.stringify(report, null, 2) + "\n");
   console.log("Portfolio lab performance:", JSON.stringify(report));
+  expect(report.median.lcp).toBeLessThanOrEqual(2500);
+  expect(report.median.cls).toBeLessThanOrEqual(0.1);
 });

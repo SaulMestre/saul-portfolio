@@ -23,7 +23,22 @@ jobs:
         run: npm ci
       - run: npm run lint
       - run: npm run typecheck
-      - run: npm run format:check
+      - name: Check frontend formatting
+        id: format
+        run: npm run format:check
+      - name: Generate exact formatter patch on failure
+        if: ${{ failure() && steps.format.outcome == 'failure' }}
+        run: |
+          npm run format
+          git diff -- . > "$RUNNER_TEMP/frontend-format.patch"
+      - name: Retain formatter patch
+        if: ${{ failure() && steps.format.outcome == 'failure' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: frontend-format-patch
+          path: ${{ runner.temp }}/frontend-format.patch
+          if-no-files-found: error
+          retention-days: 7
       - run: npm run test:coverage
       - name: Retain frontend coverage
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -35,6 +50,14 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - name: Retain production visual review evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: frontend-production-visual-review
+          path: frontend/test-results/
+          if-no-files-found: ignore
+          retention-days: 30
       - name: Capture production shell performance
         run: npx playwright test --config playwright.performance.config.ts
       - name: Retain performance evidence
@@ -43,6 +66,16 @@ jobs:
           name: visual-foundation-performance
           path: frontend/test-results/performance/
           if-no-files-found: error
+          retention-days: 30
+      - name: Check development-only showcase
+        run: npx playwright test --config playwright.dev.config.ts
+      - name: Retain development visual review evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: frontend-development-visual-review
+          path: frontend/test-results/development/
+          if-no-files-found: ignore
           retention-days: 30
       - name: Verify frontend gates reject invalid fixtures
         run: python3 ../scripts/verify_quality_gates.py frontend

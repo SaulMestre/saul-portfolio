@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
+import { scanAccessibility } from "./accessibility-scan";
 
 for (const locale of ["es", "en"]) {
-  test(`development showcase works in ${locale} and both themes`, async ({ page }) => {
+  test(`development showcase works in ${locale} and both themes`, async ({ page }, testInfo) => {
     await page.goto("/" + locale + "/design-system");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     const selector = page.getByRole("combobox");
@@ -19,6 +20,8 @@ for (const locale of ["es", "en"]) {
       await expect(page.locator('button:disabled').first()).toBeDisabled();
       await expect(page.locator('[data-surface="surface"]').first()).toBeVisible();
       await expect(page.locator('[data-surface="muted"]').first()).toBeVisible();
+      expect(await scanAccessibility(page, "main")).toEqual([]);
+      await page.screenshot({ path: testInfo.outputPath(mode + ".png"), fullPage: true });
     }
   });
 }

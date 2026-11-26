@@ -50,7 +50,21 @@ Tokens support reduced motion and system appearance. The shared site layout
 contains the localized native theme selector. The validated browser-local
 preference is stored as portfolio.theme; system mode removes data-theme so
 CSS follows the OS. A static synchronous head script restores explicit modes
-before rendering. The development showcase belongs to the final increment. New components should be added only
+before rendering. The development showcase is available at /es/design-system and /en/design-system
+when running npm run dev; production requests must return not-found. It uses
+real shared primitives, with every action variant and size, disabled and busy
+states, and both card surfaces. The site theme selector controls its appearance.
+New components should be added only
 when a feature needs them. Keep component behavior tests and the existing
 coverage gates. See the approved visual foundation plan and research for
 the design decisions and verification matrix.
+
+## Verification
+
+Run npm run format before committing frontend changes, then the existing lint,
+typecheck, coverage, build and browser checks. If CI rejects formatting, it
+retains the actual Prettier-generated diff as frontend-format-patch without
+waiving the failed check. The development browser config runs the showcase
+separately. Axe-core 4.14.1 is an exact development dependency for automated
+WCAG checks; it is not included in the application runtime. Browser checks
+and screenshots inform, but do not replace, manual accessibility review.
