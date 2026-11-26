@@ -18,3 +18,9 @@ Before making any change, read:
 - Use small English-named branches and pull requests. Do not merge on behalf of the owner or bypass required checks.
 - For changes beyond a small fix, confirm that requirements, plan and tasks exist and are approved before implementation. If a rule conflicts with the constitution, stop that conflicting change and document the conflict.
 - Follow the PR checklist and record limitations. Update architecture documentation only when a decision or implementation changes.
+
+## Spec Kit
+
+- The approved constitution overrides generic upstream templates. Tests are mandatory; use the project task-template override.
+- Announce extension hooks when they run. Respect optional hook prompts and all permissions; review third-party extensions before installation. Never use an extension to bypass review or merge gates.
+- Preserve the managed integration manifests. Run `python scripts/verify_spec_kit.py` when changing Spec Kit files or overrides.

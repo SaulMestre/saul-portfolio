@@ -29,7 +29,8 @@
 ## Verification notes
 
 PR #3 was merged after engineering checks (45653173663) and secret scanning
-(45653173649) passed. T006 remains open: official generation succeeded in
-isolation, but the generated agent integration was not approved for publication.
+(45653173649) passed. T006: official files and Copilot skills are committed on the integration branch.
+The original archive passed isolated core Python workflow tests. The committed
+integration must pass its manifest and workflow CI checks before closing T006.
 T015 and T016 remain open for the coverage baseline, explicit negative tests,
 local command verification and branch protection configuration.

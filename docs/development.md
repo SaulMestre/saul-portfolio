@@ -38,17 +38,37 @@ CI runs on Ubuntu 24.04 to support the pinned Playwright browser tooling.
 
 ## Spec Kit
 
-The official Specify CLI v1.4.4, pinned to upstream commit
-`c8133f463a586879e3af6dfd2864beb8995a8764`, was installed and used to generate
-an isolated Copilot integration with Python scripts in CI run 45655298305.
-The generated archive was verified against the recorded SHA-256 digest and
-its managed-file manifests. The agent skills contain automatic extension-hook
-instructions; their publication was not approved through the connector.
-The generated integration is therefore not installed in this repository.
-The temporary preview workflow is removed. The existing constitution,
-repository instructions, and specification-driven workflow remain authoritative.
-Any future adoption of managed agent skills requires a separate review and
-explicit approval. No extension hooks are enabled as part of this change.
+Official Specify CLI v1.4.4, pinned to upstream commit
+`c8133f463a586879e3af6dfd2864beb8995a8764`, generated the Copilot integration
+with Python scripts in CI run 45655298305. The original archive SHA-256 is
+`37c9977643f99ecc7c67f595e24d116c7dbe535f6f2e63223aa54de11ce878bb`.
+The managed files are committed with their manifests and upstream MIT license.
+The approved constitution is preserved. Project-specific template overrides
+live under `.specify/templates/overrides/` rather than modifying managed files.
+Tests are mandatory under the constitution.
+
+To install the CLI locally (Python 3.11+ and uv required):
+
+```sh
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@c8133f463a586879e3af6dfd2864beb8995a8764
+specify version
+python scripts/verify_spec_kit.py
+```
+
+Use Copilot's native skills: specify, clarify, plan, tasks, analyze, implement
+and converge. Review the spec, plan and tasks before implementation. The owner
+permits automatic skills and reviewed official extensions, with hook execution
+announced; optional hooks require the normal choice, and sensitive operations
+remain subject to authorization. No additional extension is installed here.
+Do not install third-party extensions without review. The constitution and
+repository instructions take precedence over generic templates. Do not
+reinitialize the repository in place or overwrite the approved constitution.
+
+The isolated Python workflow passed against the original generated archive.
+CI now validates the committed manifests and exercises feature creation, plan
+setup, task template resolution and missing-document failure behavior in a
+temporary directory. Interactive Copilot invocation and actual extension hooks
+have not been exercised in this environment.
 
 ## Verification
 
@@ -57,5 +77,5 @@ scan 45653173649. Frontend and backend builds, locked dependency restores,
 unit and integration tests, browser smoke tests and static checks passed.
 The npm audit reported zero vulnerabilities. Local developer commands have
 not been independently executed on the owner's machine. Branch protection,
-coverage baseline and official in-repository Spec Kit integration remain
+coverage baseline and the final CI verification of the Spec Kit integration remain
 open. Do not deploy this shell as the final portfolio.
