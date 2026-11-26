@@ -31,26 +31,30 @@ describe("Button", () => {
     expect((screen.getByRole("button") as HTMLButtonElement).type).toBe(type);
   });
 
-  it.each([{ disabled: true }, { isLoading: true }])(
-    "prevents activation when unavailable: %j",
-    (props) => {
-      const onClick = vi.fn();
-      render(
-        <Button {...props} onClick={onClick}>
-          Action
-        </Button>,
-      );
-      const button = screen.getByRole("button", { name: "Action" }) as HTMLButtonElement;
-      expect(button.disabled).toBe(true);
-      fireEvent.click(button);
-      expect(onClick).not.toHaveBeenCalled();
-      expect(button.getAttribute("aria-busy")).toBe(props.isLoading ? "true" : null);
-    },
-  );
+  it.each([
+    { disabled: true, isLoading: false },
+    { disabled: false, isLoading: true },
+  ])("prevents activation when unavailable: %j", (props) => {
+    const onClick = vi.fn();
+    render(
+      <Button {...props} onClick={onClick}>
+        Action
+      </Button>,
+    );
+    const button = screen.getByRole("button", { name: "Action" }) as HTMLButtonElement;
+    expect(button.disabled).toBe(true);
+    fireEvent.click(button);
+    expect(onClick).not.toHaveBeenCalled();
+    expect(button.getAttribute("aria-busy")).toBe(props.isLoading ? "true" : null);
+  });
 
   it("supports ordinary activation and accessible names", () => {
     const onClick = vi.fn();
-    render(<Button aria-label="Save changes" onClick={onClick}>Save</Button>);
+    render(
+      <Button aria-label="Save changes" onClick={onClick}>
+        Save
+      </Button>,
+    );
     fireEvent.click(screen.getByRole("button", { name: "Save changes" }));
     expect(onClick).toHaveBeenCalledOnce();
   });

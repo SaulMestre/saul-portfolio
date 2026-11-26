@@ -24,3 +24,7 @@ identifiers after the CI run succeeds. The result above completes T001.
 Tests for shared primitives, token propagation and contrast are added before the corresponding implementation. Await the deliberate red run; no new UI behavior is claimed yet. Keep the approved coverage floors and four required
 CI contexts. The first implementation PR remains a draft until the baseline,
 negative tests and final implementation checks have been verified.
+
+## Tests-first run
+
+Engineering checks 45840166317 on 0e6274eb4dd8f376da35f9f85956fb3c9c14df1d rejected the new component tests at TypeScript checking because the button, action-link, card and container modules did not exist (TS2307). Backend, Spec Kit and secrets passed. This confirms the pre-implementation contract is absent; the runtime assertions and browser tests were not reached in this run. The implementation and formatting adjustments are now submitted for CI; do not mark the remaining tasks complete until verified.
