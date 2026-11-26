@@ -53,3 +53,13 @@ jobs:
           for project in $(find backend -name '*.csproj'); do
             git ls-files --error-unmatch "$(dirname "$project")/packages.lock.json"
           done
+
+  spec-kit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Verify official Spec Kit files and isolated feature workflow
+        run: python3 scripts/verify_spec_kit.py
