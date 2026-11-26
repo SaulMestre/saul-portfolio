@@ -17,7 +17,14 @@ describe("ActionLink", () => {
 
   it("supports the shared action variant and locale semantics", () => {
     render(
-      <ActionLink href="/es" variant="outline" size="sm" hrefLang="es" lang="es" aria-current="page">
+      <ActionLink
+        href="/es"
+        variant="outline"
+        size="sm"
+        hrefLang="es"
+        lang="es"
+        aria-current="page"
+      >
         Español
       </ActionLink>,
     );

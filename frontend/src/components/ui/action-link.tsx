@@ -8,7 +8,12 @@ type ActionLinkProps = Omit<ComponentProps<typeof Link>, "className" | "style" |
   children: ReactNode;
 };
 
-export function ActionLink({ variant = "primary", size = "md", children, ...props }: ActionLinkProps) {
+export function ActionLink({
+  variant = "primary",
+  size = "md",
+  children,
+  ...props
+}: ActionLinkProps) {
   return (
     <Link {...props} className="ui-action" data-variant={variant} data-size={size}>
       {children}
