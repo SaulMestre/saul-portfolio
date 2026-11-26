@@ -1,0 +1,133 @@
+@layer components {
+  .ui-action {
+    --action-background: var(--ui-accent);
+    --action-foreground: var(--ui-on-accent);
+    --action-border: transparent;
+    --action-hover: var(--ui-accent-hover);
+    --action-pressed: var(--ui-accent-pressed);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--ui-space) * 2);
+    min-height: var(--ui-action-md);
+    padding: calc(var(--ui-space) * 2) calc(var(--ui-space) * 4);
+    border: var(--ui-border-width) solid var(--action-border);
+    border-radius: var(--ui-radius-md);
+    background-color: var(--action-background);
+    color: var(--action-foreground);
+    font-size: var(--ui-text-sm);
+    font-weight: var(--ui-weight-semibold);
+    line-height: var(--ui-leading-heading);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color var(--ui-motion-standard) var(--ui-ease),
+      color var(--ui-motion-standard) var(--ui-ease),
+      border-color var(--ui-motion-standard) var(--ui-ease);
+  }
+
+  .ui-action[data-variant="secondary"] {
+    --action-background: var(--ui-surface-muted);
+    --action-foreground: var(--ui-text);
+    --action-border: var(--ui-control-border);
+    --action-hover: var(--ui-surface);
+    --action-pressed: var(--ui-background);
+  }
+
+  .ui-action[data-variant="outline"] {
+    --action-background: transparent;
+    --action-foreground: var(--ui-accent);
+    --action-border: var(--ui-control-border);
+    --action-hover: var(--ui-surface-muted);
+    --action-pressed: var(--ui-surface);
+  }
+
+  .ui-action[data-variant="ghost"] {
+    --action-background: transparent;
+    --action-foreground: var(--ui-text);
+    --action-hover: var(--ui-surface-muted);
+    --action-pressed: var(--ui-surface);
+  }
+
+  .ui-action[data-variant="destructive"] {
+    --action-background: var(--ui-danger);
+    --action-foreground: var(--ui-on-danger);
+    --action-hover: var(--ui-danger-hover);
+    --action-pressed: var(--ui-danger-pressed);
+  }
+
+  .ui-action[data-size="sm"] {
+    min-height: var(--ui-action-sm);
+    padding: var(--ui-space) calc(var(--ui-space) * 3);
+    font-size: var(--ui-text-xs);
+  }
+
+  .ui-action[data-size="lg"] {
+    min-height: var(--ui-action-lg);
+    padding: calc(var(--ui-space) * 3) calc(var(--ui-space) * 5);
+    font-size: var(--ui-text-base);
+  }
+
+  @media (hover: hover) {
+    .ui-action:not(:disabled):hover {
+      background-color: var(--action-hover);
+    }
+  }
+
+  .ui-action:not(:disabled):active {
+    background-color: var(--action-pressed);
+  }
+
+  .ui-action:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .ui-action[aria-busy="true"] {
+    cursor: progress;
+  }
+
+  .ui-text-link {
+    color: var(--ui-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .ui-card {
+    padding: calc(var(--ui-space) * 6);
+    border: var(--ui-border-width) solid var(--ui-border);
+    border-radius: var(--ui-radius-lg);
+    background: var(--ui-surface);
+    box-shadow: var(--ui-shadow);
+  }
+
+  .ui-card[data-surface="muted"] {
+    background: var(--ui-surface-muted);
+  }
+
+  .ui-container {
+    width: 100%;
+    max-width: var(--ui-container-width);
+    margin-inline: auto;
+    padding-inline: calc(var(--ui-space) * 4);
+  }
+
+  @media (min-width: 48rem) {
+    .ui-container {
+      padding-inline: calc(var(--ui-space) * 6);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .ui-container {
+      padding-inline: calc(var(--ui-space) * 8);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ui-action {
+      transition: none;
+    }
+  }
+}

@@ -8,7 +8,7 @@
 
 ## Phase 1: Setup
 
-- [ ] T001 Confirm main and approved documents; verify current CI baseline; record the pre-feature performance and visual evidence per quickstart.md in specs/003-visual-foundation/verification.md (SC-008, SC-009).
+- [x] T001 Confirm main and approved documents; verify current CI baseline; record the pre-feature performance and visual evidence per quickstart.md in specs/003-visual-foundation/verification.md (SC-008, SC-009).
 - [ ] T002 [P] Establish accessibility tool dependency decision: inspect current axe-core version/license, generate authentic frontend/package-lock.json via package manager for exact dev dependency in frontend/package.json, audit and review; no runtime additions (FR-011, FR-013). Defer actual dependency commit to PR D or a narrow prerequisite PR.
 
 ## Phase 2: Foundational (blocking)
