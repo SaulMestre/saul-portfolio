@@ -1,6 +1,6 @@
 # Architecture
 
-Status: proposed target; no application runtime is implemented yet. The
+Status: initial localized frontend and API health endpoint implemented; other capabilities below remain proposed. The
 constitution is authoritative. See [the foundation plan](../specs/002-engineering-foundation/plan.md)
 for the implementation sequence and decision rationale.
 
@@ -24,12 +24,11 @@ must remain usable when the chat provider is unavailable.
 
 ## Frontend
 
-Proposed: Next.js App Router, React, strict TypeScript and Tailwind CSS.
+Implemented baseline: Next.js App Router, React, strict TypeScript and Tailwind CSS.
 Use static/prerendered public routes where feasible; introduce a Node runtime
 only when an approved requirement needs request-time rendering. Keep chat,
-timeline and administration interactive features isolated. Choose the final
-rendering/deployment approach before scaffolding, including how approved content
-updates become visible. Do not implement authentication or database access in
+timeline and administration interactive features isolated. The bootstrap uses the Node server for locale redirection. Final deployment and
+content publication strategy remain open. Do not implement authentication or database access in
 Next.js as a second business backend.
 
 Feature folders own their components, hooks, API calls and schemas. Shared UI
