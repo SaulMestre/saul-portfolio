@@ -9,7 +9,7 @@
 ## Phase 1: Setup
 
 - [x] T001 Confirm main and approved documents; verify current CI baseline; record the pre-feature performance and visual evidence per quickstart.md in specs/003-visual-foundation/verification.md (SC-008, SC-009).
-- [ ] T002 [P] Establish accessibility tool dependency decision: inspect current axe-core version/license, generate authentic frontend/package-lock.json via package manager for exact dev dependency in frontend/package.json, audit and review; no runtime additions (FR-011, FR-013). Defer actual dependency commit to PR D or a narrow prerequisite PR.
+- [x] T002 [P] Establish accessibility tool dependency decision: inspect current axe-core version/license, generate authentic frontend/package-lock.json via package manager for exact dev dependency in frontend/package.json, audit and review; no runtime additions (FR-011, FR-013). Defer actual dependency commit to PR D or a narrow prerequisite PR.
 
 ## Phase 2: Foundational (blocking)
 
@@ -35,27 +35,27 @@
 
 **Independent test**: theme works in the existing localized shell before future sections exist.
 
-- [ ] T011 [P] [US2] Write frontend/src/components/theme/theme-preference.test.ts, theme-bootstrap.test.tsx and theme-selector.test.tsx covering all valid/missing/malformed values, blocked storage, native selection and root effects (FR-003, FR-004, FR-005, FR-014).
-- [ ] T012 [US2] Implement frontend/src/components/theme/theme-preference.ts; canonical ThemePreference.mode, ThemePreference.storageKey, ThemePreference.rootOverride and ThemePreference.resolvedAppearance per data-model.md; apply guarded storage and CSS system behavior (FR-003–FR-005).
-- [ ] T013 [US2] Implement frontend/src/components/theme/theme-bootstrap.tsx and integrate static synchronous early head bootstrap in frontend/src/app/[locale]/layout.tsx; CSS uses system when override absent. Verify no broad hydration suppression, unsafe data interpolation or new dynamic rendering requirement (FR-014).
-- [ ] T014 [US2] Implement native localized selector in frontend/src/components/theme/theme-selector.tsx and frontend/src/localization/messages.ts; maintain readable fallback (FR-003, FR-005, FR-009).
-- [ ] T015 [US2] Add browser cases to frontend/e2e/visual-foundation.spec.ts for all six theme/OS combinations, live OS changes, reload, locale switch, first paint and storage denial; retain real evidence (SC-002, SC-005).
+- [x] T011 [P] [US2] Write frontend/src/components/theme/theme-preference.test.ts, theme-bootstrap.test.tsx and theme-selector.test.tsx covering all valid/missing/malformed values, blocked storage, native selection and root effects (FR-003, FR-004, FR-005, FR-014).
+- [x] T012 [US2] Implement frontend/src/components/theme/theme-preference.ts; canonical ThemePreference.mode, ThemePreference.storageKey, ThemePreference.rootOverride and ThemePreference.resolvedAppearance per data-model.md; apply guarded storage and CSS system behavior (FR-003–FR-005).
+- [x] T013 [US2] Implement frontend/src/components/theme/theme-bootstrap.tsx and integrate static synchronous early head bootstrap in frontend/src/app/[locale]/layout.tsx; CSS uses system when override absent. Verify no broad hydration suppression, unsafe data interpolation or new dynamic rendering requirement (FR-014).
+- [x] T014 [US2] Implement native localized selector in frontend/src/components/theme/theme-selector.tsx and frontend/src/localization/messages.ts; maintain readable fallback (FR-003, FR-005, FR-009).
+- [x] T015 [US2] Add browser cases to frontend/e2e/visual-foundation.spec.ts for all six theme/OS combinations, live OS changes, reload, locale switch, first paint and storage denial; retain real evidence (SC-002, SC-005).
 
 ## Phase 5: User Story 3 — Responsive localized navigation (P1)
 
 **Independent test**: existing ES/EN shell navigable at 320, 768 and 1440px.
 
-- [ ] T016 [P] [US3] Write frontend/src/components/layout/site-layout.test.tsx and update existing localized route tests for skip link, landmarks, labels, correct links, metadata and unsupported locales (FR-008, FR-009, FR-016).
-- [ ] T017 [US3] Implement frontend/src/components/layout/site-header.tsx, site-footer.tsx and site-layout.tsx; NavigationDestination.locale, NavigationDestination.path, NavigationDestination.label and NavigationDestination.current per data-model.md. Use existing live locale routes, shared container, action link and theme selector (FR-008, FR-009).
-- [ ] T018 [US3] Integrate layout via frontend/src/app/[locale]/layout.tsx and simplify frontend/src/features/shell/portfolio-shell.tsx; preserve current copy, root redirect, noindex and correct unique main target. Update frontend/src/localization/messages.ts (FR-009, FR-015, FR-016).
-- [ ] T019 [US3] Extend frontend/e2e/visual-foundation.spec.ts for 320/768/1440, both locales/themes, keyboard order, skip navigation and link destinations; verify no unexpected overflow or hidden unusable controls (SC-003, SC-007).
+- [x] T016 [P] [US3] Write frontend/src/components/layout/site-layout.test.tsx and update existing localized route tests for skip link, landmarks, labels, correct links, metadata and unsupported locales (FR-008, FR-009, FR-016).
+- [x] T017 [US3] Implement frontend/src/components/layout/site-header.tsx, site-footer.tsx and site-layout.tsx; NavigationDestination.locale, NavigationDestination.path, NavigationDestination.label and NavigationDestination.current per data-model.md. Use existing live locale routes, shared container, action link and theme selector (FR-008, FR-009).
+- [x] T018 [US3] Integrate layout via frontend/src/app/[locale]/layout.tsx and simplify frontend/src/features/shell/portfolio-shell.tsx; preserve current copy, root redirect, noindex and correct unique main target. Update frontend/src/localization/messages.ts (FR-009, FR-015, FR-016).
+- [x] T019 [US3] Extend frontend/e2e/visual-foundation.spec.ts for 320/768/1440, both locales/themes, keyboard order, skip navigation and link destinations; verify no unexpected overflow or hidden unusable controls (SC-003, SC-007).
 
 ## Phase 6: User Story 4 — Accessible restrained motion (P2)
 
 **Independent test**: core shell accessible with and without motion.
 
-- [ ] T020 [P] [US4] Add reduced-motion and keyboard/focus assertions in frontend/e2e/visual-foundation.spec.ts; write tests before completing motion rules (FR-010, FR-011).
-- [ ] T021 [US4] Finish frontend/src/styles/tokens.css and primitives.css with named motion durations, explicit transition properties, reduced-motion override and focus/forced-colors treatment; verify behavior unchanged (FR-010, FR-011, SC-005).
+- [x] T020 [P] [US4] Add reduced-motion and keyboard/focus assertions in frontend/e2e/visual-foundation.spec.ts; write tests before completing motion rules (FR-010, FR-011).
+- [x] T021 [US4] Finish frontend/src/styles/tokens.css and primitives.css with named motion durations, explicit transition properties, reduced-motion override and focus/forced-colors treatment; verify behavior unchanged (FR-010, FR-011, SC-005).
 - [ ] T022 [US4] Perform preliminary keyboard, zoom, touch-target and actual contrast review in both themes; record findings and fix defects in the relevant shared source before PR C review (SC-003, SC-004).
 
 **Checkpoint / PR C**: theme + responsive localized shell + reduced motion; required CI green and owner review.

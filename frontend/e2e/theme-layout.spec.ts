@@ -93,7 +93,7 @@ test("invalid or denied storage does not prevent theme selection", async ({ page
 for (const width of [320, 768, 1440]) {
   for (const locale of ["es", "en"]) {
     for (const colorScheme of ["light", "dark"] as const) {
-      test(`layout ${width}px / ${locale} / ${colorScheme}`, async ({ page }) => {
+      test(`layout ${width}px / ${locale} / ${colorScheme}`, async ({ page }, testInfo) => {
         await page.setViewportSize({ width, height: 900 });
         await page.emulateMedia({ colorScheme });
         await page.goto("/" + locale);
@@ -105,6 +105,7 @@ for (const width of [320, 768, 1440]) {
         await expect(page.getByRole("main")).toBeVisible();
         await expect(page.getByRole("contentinfo")).toBeVisible();
         await expect(page.getByRole("combobox")).toBeVisible();
+        await page.screenshot({ path: testInfo.outputPath("shell.png"), fullPage: true });
       });
     }
   }
