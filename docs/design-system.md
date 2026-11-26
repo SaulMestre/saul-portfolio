@@ -41,6 +41,9 @@ button to avoid accidental form submissions; request submit or reset
 explicitly. Disabled and busy buttons cannot be activated; busy keeps the
 accessible name and sets aria-busy. Supply a localized busy label as needed.
 ActionLink retains native link semantics and must have a valid destination.
+Use documentNavigation for locale changes across localized root layouts so
+that the new document runs the early theme bootstrap. Other internal links
+use Next Link client navigation; both paths share the same visual rules.
 Cards are surfaces, not buttons. Container uses responsive width and padding.
 
 Tokens support reduced motion and system appearance. The shared site layout

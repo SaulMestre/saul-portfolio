@@ -7,6 +7,8 @@ test("default locale and keyboard language navigation", async ({ page }) => {
   await page.keyboard.press("Tab");
   await expect(page.getByRole("link", { name: "Saltar al contenido" })).toBeFocused();
   await page.keyboard.press("Tab");
+  await expect(page.getByRole("link", { name: "Inicio" })).toBeFocused();
+  await page.keyboard.press("Tab");
   await expect(page.getByRole("link", { name: "English" })).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/en$/);

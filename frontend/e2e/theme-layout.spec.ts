@@ -18,9 +18,14 @@ for (const system of ["light", "dark"] as const) {
       await page.reload();
       await expect(selector).toHaveValue(mode);
       await expect(page.locator("body")).toHaveCSS("background-color", backgrounds[resolved]);
+      expect(await page.evaluate(() => localStorage.getItem("portfolio.theme"))).toBe(mode);
       await page.getByRole("link", { name: "English" }).click();
       await expect(page).toHaveURL(/\/en$/);
       await expect(page.getByRole("combobox", { name: "Theme" })).toHaveValue(mode);
+      await expect(page.locator("body")).toHaveCSS("background-color", backgrounds[resolved]);
+      await page.getByRole("link", { name: "Español" }).click();
+      await expect(page).toHaveURL(/\/es$/);
+      await expect(selector).toHaveValue(mode);
       await expect(page.locator("body")).toHaveCSS("background-color", backgrounds[resolved]);
     });
   }

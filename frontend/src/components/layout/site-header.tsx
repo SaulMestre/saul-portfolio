@@ -21,6 +21,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             <nav aria-label={copy.languageLabel}>
               <ActionLink
                 variant="outline"
+                documentNavigation
                 href={`/${alternateLocale}`}
                 hrefLang={alternateLocale}
                 lang={alternateLocale}
