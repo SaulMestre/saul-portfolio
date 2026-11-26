@@ -41,10 +41,9 @@ describe("Localized routes", () => {
 
   it("rejects unsupported locales in metadata, layout and page", async () => {
     const invalid = params("fr");
-    await expect(generateMetadata({ params: invalid })).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
-    await expect(
-      LocaleLayout({ children: null, params: invalid }),
-    ).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
-    await expect(HomePage({ params: invalid })).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
+    const notFoundError = "NEXT_HTTP_ERROR_FALLBACK;404";
+    await expect(generateMetadata({ params: invalid })).rejects.toThrow(notFoundError);
+    await expect(LocaleLayout({ children: null, params: invalid })).rejects.toThrow(notFoundError);
+    await expect(HomePage({ params: invalid })).rejects.toThrow(notFoundError);
   });
 });
