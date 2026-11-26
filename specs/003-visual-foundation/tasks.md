@@ -64,17 +64,17 @@
 
 **Independent test**: actual primitives demonstrable only on development server.
 
-- [ ] T023 [P] [US5] Write frontend/src/features/design-system/component-showcase.test.tsx and frontend/e2e/design-system-dev.spec.ts; define expected variant/size/state matrix and locale labels (FR-012).
-- [ ] T024 [US5] Implement frontend/src/features/design-system/component-showcase.tsx and frontend/src/app/[locale]/design-system/page.tsx; ShowcaseExample.primitive, ShowcaseExample.coverage, ShowcaseExample.available and ShowcaseExample.label per data-model.md. Localize examples, use actual components and server production guard (FR-012).
-- [ ] T025 [US5] Add frontend/playwright.dev.config.ts and production denial cases in frontend/e2e/visual-foundation.spec.ts; integrate dev checks into frontend job in .github/workflows/ci.yml, preserve required context name (FR-012, SC-006).
+- [x] T023 [P] [US5] Write frontend/src/features/design-system/component-showcase.test.tsx and frontend/e2e/design-system-dev.spec.ts; define expected variant/size/state matrix and locale labels (FR-012).
+- [x] T024 [US5] Implement frontend/src/features/design-system/component-showcase.tsx and frontend/src/app/[locale]/design-system/page.tsx; ShowcaseExample.primitive, ShowcaseExample.coverage, ShowcaseExample.available and ShowcaseExample.label per data-model.md. Localize examples, use actual components and server production guard (FR-012).
+- [x] T025 [US5] Add frontend/playwright.dev.config.ts and production denial cases in frontend/e2e/visual-foundation.spec.ts; integrate dev checks into frontend job in .github/workflows/ci.yml, preserve required context name (FR-012, SC-006).
 - [ ] T026 [US5] Complete docs/design-system.md and docs/development.md with variant/size usage, token ownership, theme/locale rules, showcase commands, and extension rule for future primitives; record shared style review (FR-013, SC-001).
 
 ## Phase 8: Polish and verification
 
 - [ ] T027 Implement frontend/e2e/accessibility.spec.ts with pinned local axe-core from T002; scan agreed shell/showcase cases, explicit focus/contrast tests, no unjustified rule suppression; run automated and manual accessibility checks and document limitations (FR-011, SC-004).
-- [ ] T028 Implement frontend/e2e/performance.spec.ts per quickstart.md; compare three baseline/final production samples under identical documented profile, record median LCP/CLS and retain results in frontend CI artifacts without personal data (SC-009).
+- [x] T028 Implement frontend/e2e/performance.spec.ts per quickstart.md; compare three baseline/final production samples under identical documented profile, record median LCP/CLS and retain results in frontend CI artifacts without personal data (SC-009).
 - [ ] T029 Validate visual matrix and representative screenshots in both themes, both locales, narrow/desktop layouts, 200% zoom and reduced motion; resolve findings, update verification.md (FR-015, SC-003–SC-006).
-- [ ] T030 Run all four CI checks, frontend test coverage, production and dev route tests, audit and existing backend tests. Record actual run IDs, coverage and acceptance matrix in verification.md; no false local Copilot or unrun browser claims (FR-013, FR-016, SC-008).
+- [x] T030 Run all four CI checks, frontend test coverage, production and dev route tests, audit and existing backend tests. Record actual run IDs, coverage and acceptance matrix in verification.md; no false local Copilot or unrun browser claims (FR-013, FR-016, SC-008).
 - [ ] T031 Update docs/architecture.md only for implemented frontend decisions, mark completed tasks with evidence, obtain owner visual approval and review PR D before merge. Explicitly document any remaining blockers; do not deploy (FR-013, FR-016).
 
 ## Dependencies & Execution Order

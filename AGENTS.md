@@ -16,6 +16,7 @@ Before making any change, read:
 - Write and run relevant tests, format and lint code, check strict typing and build the affected projects. Report commands and actual results; do not claim unexecuted checks passed.
 - Preserve security, accessibility, localization, performance and error states. Review public-facing AI outputs and events against the constitution.
 - Use small English-named branches and pull requests. Do not merge on behalf of the owner or bypass required checks.
+- Keep tests-first development, but include the implementation and its tests in a coherent, typecheckable candidate before opening a PR. Do not publish deliberately missing modules merely to produce a red CI run. When local execution is available, run the actual formatter, lint, typecheck and relevant tests before pushing. If unavailable, use a draft PR for CI validation and present it for owner review only after the required checks pass on the current head. Disclose unverified results; do not ask the owner to diagnose failed checks.
 - For changes beyond a small fix, confirm that requirements, plan and tasks exist and are approved before implementation. If a rule conflicts with the constitution, stop that conflicting change and document the conflict.
 - Follow the PR checklist and record limitations. Update architecture documentation only when a decision or implementation changes.
 

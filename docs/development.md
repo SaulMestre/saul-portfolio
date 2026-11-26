@@ -12,6 +12,7 @@ decision. No database, paid API or secret is required.
 cd frontend
 npm ci
 npm run dev
+npm run format
 npm run lint
 npm run typecheck
 npm test
@@ -112,3 +113,28 @@ Maintain the active branch ruleset targeting `main` in repository Settings > Rul
 ### Interactive Copilot verification (owner environment)
 
 Open the repository in VS Code with GitHub Copilot enabled. Open agent chat and confirm the nine Spec Kit skills are available. For the first real feature, invoke `/speckit-specify` on its development branch, review the resulting specification, then invoke plan and tasks at the approved review gates. Confirm the project constitution is respected and tests are included before implementation. Do not publish generated personal data or bypass permission prompts. On 2026-11-26 the owner installed Specify 1.4.4 and confirmed skill discovery after opening the repository root in VS Code. Actual interactive invocation remains pending the first real feature; no live Copilot execution is claimed.
+
+## Practical frontend validation
+
+Keep the existing toolchain and required checks. Prettier owns formatting,
+ESLint code analysis, TypeScript typechecking, Vitest behavioral tests and
+Playwright browser verification. Run the existing formatter locally before
+committing whenever execution is available. Keep tests-first work on the
+feature branch and submit a coherent implementation with tests; a missing
+module is not useful evidence that a behavioral regression test works.
+
+For connector-only development without a local executable checkout, CI is
+the verification environment. Open a draft for the complete candidate and
+check the exact head's results before marking it ready or asking the owner
+to review. Never claim a pending run passed. Formatting runs after the
+functional checks and still fails the required frontend job on violations.
+Its exact generated patch is retained on failure. No check, coverage floor,
+dependency lock or branch-protection requirement is relaxed.
+
+The development-only component reference is available at /es/design-system
+and /en/design-system with npm run dev. Use the existing theme selector to
+review both appearances. Run the development browser suite with
+npx playwright test --config playwright.dev.config.ts. Run the production
+performance suite with npx playwright test --config playwright.performance.config.ts
+after npm run build. Axe-core is an exact development dependency for browser
+accessibility checks; the automated scan is not certification.

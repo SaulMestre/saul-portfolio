@@ -50,3 +50,27 @@ PR #12 merged at fa4a8e369ae0c3bdc57b46ac4acbd56f11f80400. Engineering checks 45
 Axe-core 4.14.1 (MPL-2.0) is already present transitively in the approved npm lock via eslint-plugin-jsx-a11y. Promote the same version to an exact direct development dependency using npm, retain generated manifests in an artifact, review the diff and remove the temporary preparation workflow before merging. No runtime package addition. Showcase tests precede implementation; pending CI and final verification.
 
 Engineering checks 45854994021 rejected the initial tests-first commit at typecheck (missing showcase and page modules, TS2307); no application defect or runtime test result was measured. Secret scanning 45854994032 and dependency preparation 45854994254 passed. The generated artifact 15135072880 was downloaded and independently verified against SHA-256 898a6aaeacdd5eef3bc2208779e90c315fe479380693692e745bdf3e85a086b0. Git blob hashes ee73fd747f8c551375029249f995c4312f382cf8 (package.json) and 2b89e126e6e4a0784205fbaf00ebdfe4368d0319 (package-lock.json) match the exact generated manifests. The only lock change is the root dev dependency declaration; the existing axe-core package remains unchanged. The temporary preparation workflow is removed. Final showcase, accessibility, production denial and performance results remain pending CI. Format failures now retain the real formatter diff without bypassing the required check.
+
+## PR D — merged automated verification
+
+PR #13 merged at ac91ee1254b81d10efc4551df1c5203390a5e283. Engineering checks
+45857738220 and secret scanning 45857738182 succeeded: 59 unit tests, 100%
+coverage in all four frontend metrics, 33 production browser tests and two
+development showcase browser tests passed. The performance test passed its
+budget. The audit reported zero vulnerabilities and the existing negative
+fixtures were rejected. Production denial and automated accessibility scans
+passed in the agreed browser. Final LCP samples 488/388/388 ms (median 388 ms)
+and CLS 0/0/0 compare with the baseline 372 ms and 0, on the same recorded
+Chromium/Node/profile. These are laboratory observations, not field data.
+
+Artifacts for run 45857738220: frontend coverage 15137310442, performance
+15136578634, production screenshots 15136123957, development screenshots
+15136214067, backend coverage 15136473639. Manual screenshot inspection,
+200% zoom, touch targets, first-paint visual review and owner visual
+acceptance remain open; do not equate passing CI with completing those items.
+The owner merged PR #13; no separate manual visual acceptance is claimed.
+
+The follow-up validation workflow moves formatting after functional checks
+and keeps its failure blocking. It adds no tool or dependency. The agent
+instructions require a coherent candidate and green checks before review;
+deliberately missing modules are not submitted as review-ready work.
