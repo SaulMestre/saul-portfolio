@@ -125,6 +125,55 @@
     }
   }
 
+  .ui-theme-control {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--ui-space) * 2);
+    font-size: var(--ui-text-sm);
+    font-weight: var(--ui-weight-medium);
+  }
+
+  .ui-select {
+    min-height: var(--ui-action-lg);
+    max-width: 100%;
+    padding: var(--ui-space) calc(var(--ui-space) * 2);
+    border: var(--ui-border-width) solid var(--ui-control-border);
+    border-radius: var(--ui-radius-md);
+    background-color: var(--ui-surface);
+    color: var(--ui-text);
+    font: inherit;
+  }
+
+  .ui-skip-link {
+    position: absolute;
+    top: var(--ui-space);
+    left: var(--ui-space);
+    z-index: 10;
+    padding: calc(var(--ui-space) * 3);
+    background-color: var(--ui-surface);
+    color: var(--ui-text);
+    border-radius: var(--ui-radius-md);
+    clip-path: inset(50%);
+  }
+
+  .ui-skip-link:focus {
+    clip-path: none;
+  }
+
+  @media (forced-colors: active) {
+    .ui-action,
+    .ui-select {
+      border-color: ButtonText;
+    }
+
+    .ui-action:disabled {
+      border-color: GrayText;
+      color: GrayText;
+      opacity: 1;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .ui-action {
       transition: none;

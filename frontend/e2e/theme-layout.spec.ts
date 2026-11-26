@@ -44,11 +44,22 @@ test("stored preference is applied before the document finishes loading", async 
   await page.goto("/en");
   await page.evaluate(() => localStorage.setItem("portfolio.theme", "dark"));
   await page.addInitScript(() => {
-    document.addEventListener("DOMContentLoaded", () => {
+    const observe = () => {
+      if (!document.body) {
+        requestAnimationFrame(observe);
+        return;
+      }
       document.documentElement.dataset.initialTheme = document.documentElement.dataset.theme;
-    });
+    };
+    requestAnimationFrame(observe);
   });
-  await page.reload();
+  const response = await page.reload();
+  const html = await response?.text();
+  expect(html).toBeDefined();
+  const bootstrap = html!.indexOf("localStorage.getItem");
+  const body = html!.indexOf("<body");
+  expect(bootstrap).toBeGreaterThan(-1);
+  expect(bootstrap).toBeLessThan(body);
   await expect(page.locator("html")).toHaveAttribute("data-initial-theme", "dark");
   await expect(page.locator("body")).toHaveCSS("background-color", backgrounds.dark);
 });

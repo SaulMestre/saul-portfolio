@@ -36,3 +36,5 @@ PR #11 merged at bf9eca09e050efdcf991f9ee803e3c8e4d5012d9. Engineering checks 45
 ## PR C — theme and layout
 
 New tests are committed before implementation. No new theme/layout behavior or passing result is claimed yet.
+
+The tests-first run 45845536344 rejected the new component imports (TS2307) before the theme and layout modules existed. Backend, Spec Kit and secret scanning passed (45845535206). Runtime assertions were not reached. This commit implements the missing contracts and integrates them in the locale layout; the final green run and manual checks remain pending.

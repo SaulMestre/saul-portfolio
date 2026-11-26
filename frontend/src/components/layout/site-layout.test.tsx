@@ -6,7 +6,13 @@ afterEach(cleanup);
 
 describe("Site layout", () => {
   it.each([
-    { locale: "es", home: "Inicio", language: "English", href: "/en", skip: "Saltar al contenido" },
+    {
+      locale: "es",
+      home: "Inicio",
+      language: "English",
+      href: "/en",
+      skip: "Saltar al contenido",
+    },
     { locale: "en", home: "Home", language: "Español", href: "/es", skip: "Skip to content" },
   ] as const)("renders accessible $locale landmarks and links", (example) => {
     render(

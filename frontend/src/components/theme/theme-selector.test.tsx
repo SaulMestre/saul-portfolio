@@ -1,4 +1,5 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { renderToString } from "react-dom/server";
 import { afterEach, describe, expect, it } from "vitest";
 import { setThemeMode } from "./theme-preference";
 import { ThemeSelector } from "./theme-selector";
@@ -10,6 +11,12 @@ afterEach(() => {
 });
 
 describe("Theme selector", () => {
+  it("renders a stable server snapshot for hydration", () => {
+    setThemeMode("dark");
+    const html = renderToString(<ThemeSelector locale="en" />);
+    expect(html).toContain('value="system" selected=""');
+  });
+
   it("exposes a native Spanish control with all three options", () => {
     render(<ThemeSelector locale="es" />);
     const selector = screen.getByRole("combobox", { name: "Tema" }) as HTMLSelectElement;
