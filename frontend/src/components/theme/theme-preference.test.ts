@@ -1,5 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { getThemeMode, normalizeThemeMode, setThemeMode, subscribeToTheme } from "./theme-preference";
+import {
+  getThemeMode,
+  normalizeThemeMode,
+  setThemeMode,
+  subscribeToTheme,
+} from "./theme-preference";
 
 afterEach(() => {
   vi.restoreAllMocks();
