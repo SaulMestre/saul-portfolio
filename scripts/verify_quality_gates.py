@@ -27,7 +27,7 @@ def frontend():
     expect_failure(
         root / "src/quality-gate-probe.ts",
         'export const probe: number = "invalid";\n',
-        ["npm", "run", "typecheck"], root, "Type error",
+        ["npm", "run", "typecheck"], root, "error TS2322",
     )
     expect_failure(
         root / "src/quality-gate-probe.test.ts",

@@ -13,3 +13,6 @@ covered = int(root.attrib["lines-covered"])
 if not 0 <= covered <= lines or lines == 0 or covered == 0:
     raise SystemExit("No valid nonzero application coverage")
 print(f"Backend line coverage: {100 * covered / lines:.2f}% ({covered}/{lines})")
+
+if 100 * covered / lines < 100:
+    raise SystemExit("Backend line coverage regressed below the initial 100% baseline")

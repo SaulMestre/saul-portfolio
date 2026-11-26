@@ -32,3 +32,5 @@ PR #3 was merged after engineering checks (45653173663) and secret scanning
 (45653173649) passed. T006: official Spec Kit integration verified in CI run 45802488317; PR #6 merged. Interactive Copilot invocation remains a separate manual verification.
 T015 and T016 remain open for the coverage baseline, explicit negative tests,
 local command verification and branch protection configuration.
+
+Owner confirmation (2026-11-26): active main protection ruleset created; Specify 1.4.4 installed locally and Copilot skill discovery confirmed. Actual skill execution remains pending. Initial frontend and backend coverage reports were obtained from runs 45807068825 and 45807068727. The TypeScript negative fixture was correctly rejected with TS2322; the verifier's expected diagnostic marker is corrected in PR #7. Backend negative fixture passed. Final coverage and negative checks remain pending the revised CI run.
