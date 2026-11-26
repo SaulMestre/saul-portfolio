@@ -14,9 +14,7 @@ describe("Component showcase", () => {
         const button = document.querySelector(
           `button[data-variant="${variant}"][data-size="${size}"]`,
         );
-        const link = document.querySelector(
-          `a[data-variant="${variant}"][data-size="${size}"]`,
-        );
+        const link = document.querySelector(`a[data-variant="${variant}"][data-size="${size}"]`);
         expect(button).not.toBeNull();
         expect(link).not.toBeNull();
       }

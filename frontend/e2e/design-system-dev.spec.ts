@@ -17,7 +17,7 @@ for (const locale of ["es", "en"]) {
         }
       }
       await expect(page.locator('button[aria-busy="true"]')).toBeDisabled();
-      await expect(page.locator('button:disabled').first()).toBeDisabled();
+      await expect(page.locator("button:disabled").first()).toBeDisabled();
       await expect(page.locator('[data-surface="surface"]').first()).toBeVisible();
       await expect(page.locator('[data-surface="muted"]').first()).toBeVisible();
       expect(await scanAccessibility(page, "main")).toEqual([]);
