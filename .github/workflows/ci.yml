@@ -20,25 +20,10 @@ jobs:
         with:
           node-version-file: .node-version
       - name: Restore locked dependencies
+        id: restore
         run: npm ci
       - run: npm run lint
       - run: npm run typecheck
-      - name: Check frontend formatting
-        id: format
-        run: npm run format:check
-      - name: Generate exact formatter patch on failure
-        if: ${{ failure() && steps.format.outcome == 'failure' }}
-        run: |
-          npm run format
-          git diff -- . > "$RUNNER_TEMP/frontend-format.patch"
-      - name: Retain formatter patch
-        if: ${{ failure() && steps.format.outcome == 'failure' }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: frontend-format-patch
-          path: ${{ runner.temp }}/frontend-format.patch
-          if-no-files-found: error
-          retention-days: 7
       - run: npm run test:coverage
       - name: Retain frontend coverage
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -85,6 +70,23 @@ jobs:
       - name: Require committed lock
         if: ${{ !cancelled() }}
         run: git ls-files --error-unmatch package-lock.json
+      - name: Check frontend formatting
+        id: format
+        if: ${{ !cancelled() && steps.restore.outcome == 'success' }}
+        run: npm run format:check
+      - name: Generate exact formatter patch on failure
+        if: ${{ failure() && steps.format.outcome == 'failure' }}
+        run: |
+          npm run format
+          git diff -- . > "$RUNNER_TEMP/frontend-format.patch"
+      - name: Retain formatter patch
+        if: ${{ failure() && steps.format.outcome == 'failure' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: frontend-format-patch
+          path: ${{ runner.temp }}/frontend-format.patch
+          if-no-files-found: error
+          retention-days: 7
   backend:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
