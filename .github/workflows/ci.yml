@@ -28,6 +28,8 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - name: Verify frontend gates reject invalid fixtures
+        run: python3 ../scripts/verify_quality_gates.py frontend
       - name: Audit dependencies
         if: ${{ !cancelled() }}
         run: npm audit --audit-level=high
@@ -47,7 +49,19 @@ jobs:
       - name: Restore locked dependencies
         run: dotnet restore backend/Portfolio.slnx --locked-mode
       - run: dotnet build backend/Portfolio.slnx --no-restore --configuration Release
-      - run: dotnet test backend/Portfolio.slnx --no-build --configuration Release
+      - name: Test backend and collect application coverage
+        run: dotnet test backend/Portfolio.slnx --no-build --configuration Release --collect "Code Coverage;Format=Cobertura" --settings backend/coverage.runsettings --results-directory "${{ runner.temp }}/backend-coverage"
+      - name: Summarize backend coverage
+        run: python3 scripts/report_backend_coverage.py "${{ runner.temp }}/backend-coverage"
+      - name: Retain backend coverage
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: backend-coverage
+          path: ${{ runner.temp }}/backend-coverage/**/*.cobertura.xml
+          if-no-files-found: error
+          retention-days: 7
+      - name: Verify backend test gate rejects invalid fixture
+        run: python3 scripts/verify_quality_gates.py backend
       - name: Require committed locks
         run: |
           for project in $(find backend -name '*.csproj'); do

@@ -68,7 +68,7 @@ The isolated Python workflow passed against the original generated archive.
 CI now validates the committed manifests and exercises feature creation, plan
 setup, task template resolution and missing-document failure behavior in a
 temporary directory. Interactive Copilot invocation and actual extension hooks
-have not been exercised in this environment.
+have not been exercised in this environment. The committed integration passed the dedicated Spec Kit CI job in run 45802488317.
 
 ## Verification
 
@@ -77,5 +77,16 @@ scan 45653173649. Frontend and backend builds, locked dependency restores,
 unit and integration tests, browser smoke tests and static checks passed.
 The npm audit reported zero vulnerabilities. Local developer commands have
 not been independently executed on the owner's machine. Branch protection,
-coverage baseline and the final CI verification of the Spec Kit integration remain
-open. Do not deploy this shell as the final portfolio.
+coverage baseline remain open. Spec Kit integration passed CI run 45802488317. Do not deploy this shell as the final portfolio.
+
+## Final foundation verification
+
+Coverage is measured over application source, excluding test assemblies and test files. The initial values will be recorded after the CI reports are verified; no threshold is claimed before measurement. Frontend coverage uses the matching Vitest V8 provider. Backend coverage uses the already locked Microsoft.CodeCoverage collector. Negative fixtures are created only in CI and removed after the expected failure.
+
+### Required repository rules (owner configuration)
+
+Create an active branch ruleset targeting `main` in repository Settings > Rules > Rulesets. Require a pull request before merging, require the four checks `Engineering checks / frontend`, `Engineering checks / backend`, `Engineering checks / spec-kit`, and `Secret scanning / secrets` (select the actual check contexts from successful runs), require up-to-date branches, block force pushes and deletion, and do not add routine bypass actors. The owner retains review responsibility; do not require an independent approval until a separate reviewer is available, because GitHub does not permit authors to approve their own PRs. Verify the actual rule in the UI; this connector cannot read or change rulesets.
+
+### Interactive Copilot verification (owner environment)
+
+Open the repository in VS Code with GitHub Copilot enabled. Open agent chat and confirm the nine Spec Kit skills are available. In a disposable branch or worktree invoke `/speckit-specify` for a synthetic feature and review the resulting specification, then invoke plan and tasks. Confirm the project constitution is respected and tests are included. Discard the synthetic feature after verification. Do not publish generated personal data or bypass permission prompts. No live Copilot invocation is claimed by automated script tests.

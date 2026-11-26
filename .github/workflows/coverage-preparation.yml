@@ -1,0 +1,39 @@
+name: Coverage preparation
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/coverage-preparation.yml'
+permissions:
+  contents: read
+jobs:
+  frontend-coverage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+      - name: Prepare candidate dependency locks
+        working-directory: frontend
+        run: |
+          npm install --package-lock-only --ignore-scripts --save-dev --save-exact @vitest/coverage-v8@5.1.2
+          npm ci
+          npm audit --audit-level=high
+      - name: Measure source coverage
+        working-directory: frontend
+        run: |
+          npm test -- --coverage.enabled --coverage.provider=v8 --coverage.include='src/**/*.{ts,tsx}' --coverage.exclude='src/**/*.test.{ts,tsx}' --coverage.exclude='src/**/*.d.ts' --coverage.reporter=text --coverage.reporter=json-summary
+      - name: Retain candidate locks and coverage baseline
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: frontend-coverage-candidate
+          path: |
+            frontend/package.json
+            frontend/package-lock.json
+            frontend/coverage/coverage-summary.json
+          if-no-files-found: error
+          retention-days: 3

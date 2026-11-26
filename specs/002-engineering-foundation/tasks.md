@@ -10,7 +10,7 @@
 ## Phase 2 — Scaffolding (after approval)
 
 - [x] T005 Verify supported Node/.NET/Spec Kit versions and pin toolchains.
-- [ ] T006 Initialize official Spec Kit tooling; preserve and align existing artifacts.
+- [x] T006 Initialize official Spec Kit tooling; preserve and align existing artifacts.
 - [x] T007 Scaffold strict TypeScript frontend with localization resources.
 - [x] T008 Scaffold .NET solution and allowed project references.
 - [x] T009 Implement a real minimal health endpoint and safe configuration.
@@ -29,8 +29,6 @@
 ## Verification notes
 
 PR #3 was merged after engineering checks (45653173663) and secret scanning
-(45653173649) passed. T006: official files and Copilot skills are committed on the integration branch.
-The original archive passed isolated core Python workflow tests. The committed
-integration must pass its manifest and workflow CI checks before closing T006.
+(45653173649) passed. T006: official Spec Kit integration verified in CI run 45802488317; PR #6 merged. Interactive Copilot invocation remains a separate manual verification.
 T015 and T016 remain open for the coverage baseline, explicit negative tests,
 local command verification and branch protection configuration.
